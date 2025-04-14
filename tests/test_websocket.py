@@ -25,6 +25,9 @@ async def ws_connection():
         if os.environ.get("GITHUB_ACTIONS"):
             pytest.skip(
                 f"Skipping Binance WebSocket test on GitHub Actions: {e}")
+        else:
+            # Re-raise exception if not in CI.
+            raise
 
 
 @pytest.mark.websocket
