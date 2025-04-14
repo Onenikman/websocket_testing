@@ -29,11 +29,11 @@ jobs:
           - name: Install dependencies
             run: poetry install --no-root
           - name: all_tests
-            if: 'github.event.inputs.deployment_target == "all_tests"'
+            if: github.event.inputs.deployment_target == 'all_tests'
             run: poetry run pytest
           - name: websocket_tests
-            if: 'github.event.inputs.deployment_target == "websocket_tests"'
+            if: github.event.inputs.deployment_target == 'websocket_tests'
             run: poetry run pytest -m "websocket"
           - name: api_async_tests
-            if: 'github.event.inputs.deployment_target == "api_async_tests"'
+            if: github.event.inputs.deployment_target == 'api_async_tests'
             run: poetry run pytest -m "api_async"
