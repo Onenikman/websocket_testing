@@ -3,6 +3,7 @@ import websockets
 import json
 import time
 import pytest
+import os
 import allure
 
 
@@ -20,6 +21,10 @@ async def ws_connection():
         print(f"Unexpected error while testing WebSocket {e}")
     except websockets.exceptions.ConnectionClosed:
         print(f"Error: WebSocket connection was closed.")
+    except websockets.exceptions.InvalidStatusCode as e:
+        if os.environ.get("GITHUB_ACTIONS"):
+            pytest.skip(
+                f"Skipping Binance WebSocket test on GitHub Actions: {e}")
 
 
 @pytest.mark.websocket
